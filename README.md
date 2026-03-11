@@ -1,6 +1,6 @@
 # 🏍️ Revving Up Revenue: Motorcycle Parts Sales Analysis
 
-[![View the Full Report](https://img.shields.io/badge/View_Final_Report-Blue?style=for-the-badge)](INSERT_YOUR_PUBLISHED_LINK_HERE)
+[![View the Full Report](https://img.shields.io/badge/View_Final_Report-Blue?style=for-the-badge)](https://davidnamgung.github.io/motorcycle-parts/)
 
 ## 1. Project Background and Overview
 As a data analyst for a regional motorcycle parts distributor, I was tasked by the Board of Directors to evaluate our summer sales performance (June – August 2021). Our company operates out of three primary distribution centers and serves two distinct markets: B2B Wholesale clients and B2C Retail customers. 
