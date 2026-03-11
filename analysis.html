@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Your Name">
+<meta name="author" content="David Namgung">
 
 <title>Motorcycle Parts Sales Analysis</title>
 <style>
@@ -59,7 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="analysis_files/libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="analysis_files/libs/clipboard/clipboard.min.js"></script>
 <script src="analysis_files/libs/quarto-html/quarto.js" type="module"></script>
 <script src="analysis_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="analysis_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -67,128 +67,1489 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="analysis_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="analysis_files/libs/quarto-html/anchor.min.js"></script>
 <link href="analysis_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="analysis_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="analysis_files/libs/quarto-html/quarto-syntax-highlighting-2a367172f4fe7d9182ebf8e09f85cb4e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="analysis_files/libs/quarto-html/quarto-syntax-highlighting-dark-7fb59815a1c41eec7c034637f0c35ff0.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="analysis_files/libs/quarto-html/quarto-syntax-highlighting-2a367172f4fe7d9182ebf8e09f85cb4e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="analysis_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="analysis_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="analysis_files/libs/bootstrap/bootstrap-82a8e0681529fff444bbc39736ff6b3a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="analysis_files/libs/bootstrap/bootstrap-b5648f968cae840c1a5bb4ba6798e616.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="analysis_files/libs/bootstrap/bootstrap-dark-d756fac512f7b06a0ff1f2d4509c4b94.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="analysis_files/libs/bootstrap/bootstrap-b5648f968cae840c1a5bb4ba6798e616.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<style>html{ scroll-behavior: smooth; }</style>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="quarto-light">
+<body class="quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Motorcycle Parts Sales Analysis</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>David Namgung </p>
+            </div>
+    </div>
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
   <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Report Contents</h2>
    
   <ul>
-  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive Summary</a></li>
+  <li><a href="#project-background-and-overview" id="toc-project-background-and-overview" class="nav-link active" data-scroll-target="#project-background-and-overview">Project Background and Overview</a></li>
+  <li><a href="#data-validation-quality-assurance" id="toc-data-validation-quality-assurance" class="nav-link" data-scroll-target="#data-validation-quality-assurance">Data Validation &amp; Quality Assurance</a>
+  <ul class="collapse">
+  <li><a href="#exploratory-analysis" id="toc-exploratory-analysis" class="nav-link" data-scroll-target="#exploratory-analysis">3. Exploratory Analysis</a>
+  <ul class="collapse">
+  <li><a href="#macro-trends-summer-revenue-growth" id="toc-macro-trends-summer-revenue-growth" class="nav-link" data-scroll-target="#macro-trends-summer-revenue-growth">3.1 Macro Trends: Summer Revenue Growth</a></li>
+  <li><a href="#purchasing-behavior-average-order-value-aov" id="toc-purchasing-behavior-average-order-value-aov" class="nav-link" data-scroll-target="#purchasing-behavior-average-order-value-aov">3.2 Purchasing Behavior: Average Order Value (AOV)</a></li>
+  <li><a href="#wholesale-deep-dive" id="toc-wholesale-deep-dive" class="nav-link" data-scroll-target="#wholesale-deep-dive">3.3 Wholesale Deep Dive</a></li>
+  <li><a href="#margin-leakage-analyzing-payment-fees" id="toc-margin-leakage-analyzing-payment-fees" class="nav-link" data-scroll-target="#margin-leakage-analyzing-payment-fees">3.4 Margin Leakage: Analyzing Payment Fees</a></li>
+  <li><a href="#operational-load-vs.-revenue-generation" id="toc-operational-load-vs.-revenue-generation" class="nav-link" data-scroll-target="#operational-load-vs.-revenue-generation">3.5 Operational Load vs.&nbsp;Revenue Generation</a></li>
+  <li><a href="#product-velocity-what-moves-the-fastest" id="toc-product-velocity-what-moves-the-fastest" class="nav-link" data-scroll-target="#product-velocity-what-moves-the-fastest">3.6 Product Velocity: What Moves the Fastest?</a></li>
+  <li><a href="#pricing-dynamics-retail-vs.-wholesale-purchasing" id="toc-pricing-dynamics-retail-vs.-wholesale-purchasing" class="nav-link" data-scroll-target="#pricing-dynamics-retail-vs.-wholesale-purchasing">3.7 Pricing Dynamics: Retail vs.&nbsp;Wholesale Purchasing</a></li>
+  <li><a href="#the-retail-margin-bleed" id="toc-the-retail-margin-bleed" class="nav-link" data-scroll-target="#the-retail-margin-bleed">3.8 The Retail Margin Bleed</a></li>
+  </ul></li>
+  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link" data-scroll-target="#executive-summary">4. Executive Summary</a></li>
+  <li><a href="#insights-deep-dive" id="toc-insights-deep-dive" class="nav-link" data-scroll-target="#insights-deep-dive">4. Insights Deep Dive</a>
+  <ul class="collapse">
+  <li><a href="#the-wholesale-growth-engine-vs.-retail-stagnation" id="toc-the-wholesale-growth-engine-vs.-retail-stagnation" class="nav-link" data-scroll-target="#the-wholesale-growth-engine-vs.-retail-stagnation">4.1. The Wholesale Growth Engine vs.&nbsp;Retail Stagnation</a></li>
+  <li><a href="#product-velocity-and-inventory-load" id="toc-product-velocity-and-inventory-load" class="nav-link" data-scroll-target="#product-velocity-and-inventory-load">4.2. Product Velocity and Inventory Load</a></li>
+  <li><a href="#margin-leakage-via-payment-fees" id="toc-margin-leakage-via-payment-fees" class="nav-link" data-scroll-target="#margin-leakage-via-payment-fees">4.3. Margin Leakage via Payment Fees</a></li>
+  </ul></li>
+  <li><a href="#strategic-recommendations-next-steps" id="toc-strategic-recommendations-next-steps" class="nav-link" data-scroll-target="#strategic-recommendations-next-steps">5. Strategic Recommendations &amp; Next Steps</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Motorcycle Parts Sales Analysis</h1>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
 </div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Your Name </p>
-          </div>
-  </div>
-    
-  
-    
-  </div>
-  
 
 
-</header>
 
-
-<section id="executive-summary" class="level2">
-<h2 class="anchored" data-anchor-id="executive-summary">Executive Summary</h2>
-<p>The board of directors requested an analysis of our wholesale revenue streams. The company operates three regional warehouses and offers various payment methods, each incurring a different percentage fee.</p>
-<p><strong>Objective:</strong> Calculate the net revenue for each product line, grouped by month and warehouse, exclusively for our <strong>Wholesale</strong> clients.</p>
-<div id="df155280" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;plaintext&quot;}}">
+<p><a href="sales.csv" download="sales.csv" class="btn btn-primary" style="margin-bottom: 20px;"> 📥 Download sales.csv </a></p>
+<section id="project-background-and-overview" class="level1">
+<h1>Project Background and Overview</h1>
+<p>As a data analyst for a regional motorcycle parts distributor, I was tasked by the Board of Directors to evaluate our summer sales performance (June – August 2021). Our company operates out of three primary distribution centers (Central, North, and West) and serves two distinct markets: B2B Wholesale clients and B2C Retail customers.</p>
+<p>Recently, the company has seen fluctuating margins, prompting a review of our operational efficiency and pricing strategies.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Primary Business Objectives">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Primary Business Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Revenue Segmentation:</strong> Identify the core drivers of our Wholesale revenue by product line and regional warehouse.</li>
+<li><strong>Margin Optimization:</strong> Quantify the hidden costs associated with our accepted payment methods (Cash, Credit Card, and Bank Transfer) and their respective processing fees.</li>
+<li><strong>Operational Efficiency:</strong> Evaluate the physical volume of inventory moved through each warehouse compared to the net revenue generated.</li>
+</ul>
+</div>
+</div>
+<p>By addressing these areas, this analysis aims to provide actionable recommendations for inventory allocation, localized marketing, and payment processing renegotiations.</p>
+<p>The dataset (<code>sales.csv</code>) contains 1,000 granular transaction records. To understand the domain we are working with, I have categorized the data into three main areas:</p>
+<ul>
+<li><strong>Logistics &amp; Timeline:</strong> * <code>order_number</code>: A unique alphanumeric identifier for each transaction.
+<ul>
+<li><code>date</code>: The timestamp of the sale.</li>
+<li><code>warehouse</code>: The regional distribution center fulfilling the order (Central, North, West).</li>
+</ul></li>
+<li><strong>Client &amp; Product Metrics:</strong>
+<ul>
+<li><code>client_type</code>: The purchasing party (Wholesale or Retail).</li>
+<li><code>product_line</code>: The category of the motorcycle part (e.g., Engine, Breaking system, Frame &amp; body).</li>
+<li><code>quantity</code>: The physical number of units purchased in the transaction.</li>
+</ul></li>
+<li><strong>Financials:</strong>
+<ul>
+<li><code>unit_price</code>: The base cost per single item.</li>
+<li><code>total</code>: The gross transaction value (<code>quantity</code> * <code>unit_price</code>).</li>
+<li><code>payment</code>: The method used by the client (Cash, Credit card, Transfer).</li>
+<li><code>payment_fee</code>: The percentage fee charged by the payment processor (ranging from 0% to 3%).</li>
+</ul></li>
+</ul>
+<div id="554f034a" class="cell" data-execution_count="27">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Connect to a temporary local database</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Connect to the local database and load the CSV</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(database<span class="op">=</span><span class="st">':memory:'</span>)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's peek at the first 3 rows of our data to understand the schema</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>preview_query <span class="op">=</span> <span class="st">"SELECT * FROM 'sales.csv' LIMIT 3"</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>con.execute(preview_query).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Query the table schema to show data types and column names</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>schema_query <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">DESCRIBE SELECT * FROM 'sales.csv';</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the dataset structure</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>con.execute(schema_query).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">column_name</th>
+<th data-quarto-table-cell-role="th">column_type</th>
+<th data-quarto-table-cell-role="th">null</th>
+<th data-quarto-table-cell-role="th">key</th>
+<th data-quarto-table-cell-role="th">default</th>
+<th data-quarto-table-cell-role="th">extra</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>order_number</td>
+<td>VARCHAR</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>date</td>
+<td>TIMESTAMP WITH TIME ZONE</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>warehouse</td>
+<td>VARCHAR</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>client_type</td>
+<td>VARCHAR</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>product_line</td>
+<td>VARCHAR</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>quantity</td>
+<td>BIGINT</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>unit_price</td>
+<td>DOUBLE</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>total</td>
+<td>DOUBLE</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>payment</td>
+<td>VARCHAR</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>payment_fee</td>
+<td>DOUBLE</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div id="2dfa3de0" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;plaintext&quot;}}">
+</div>
+</div>
+</section>
+<section id="data-validation-quality-assurance" class="level1">
+<h1>Data Validation &amp; Quality Assurance</h1>
+<p>Before drawing business conclusions, we must ensure our dataset is reliable. We need to check for missing values and verify that our financial columns are mathematically sound (e.g., does <code>quantity</code> <span class="math inline">\(\times\)</span> <code>unit_price</code> actually equal the <code>total</code> billed?).</p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Quality Assurance Checks">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Quality Assurance Checks
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p><strong>Completeness:</strong> Are there any missing values (NULLs) in critical transaction fields?</p></li>
+<li><p><strong>Uniqueness:</strong> Are there any accidental duplicate entries (repeated order numbers)?</p></li>
+<li><p><strong>Logical Accuracy:</strong> Does the recorded <code>total</code> accurately reflect the <code>quantity</code> multiplied by the <code>unit_price</code> for every single row?</p></li>
+</ol>
+</div>
+</div>
+<div id="6c9cccb9" class="cell" data-execution_count="28">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sql_query <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">    product_line,</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">    CASE </span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">        WHEN EXTRACT(MONTH FROM CAST(date AS DATE)) = 6 THEN 'June'</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">        WHEN EXTRACT(MONTH FROM CAST(date AS DATE)) = 7 THEN 'July'</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">        WHEN EXTRACT(MONTH FROM CAST(date AS DATE)) = 8 THEN 'August'</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">    END AS month,</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">    warehouse,</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(total * (1 - payment_fee)), 2) AS net_revenue</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv'</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE client_type = 'Wholesale'</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY product_line, month, warehouse</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY product_line, month, net_revenue DESC;</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Execute the query and save the result as a styled dataframe</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>net_revenue_df <span class="op">=</span> con.execute(sql_query).df()</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the final, clean table</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>net_revenue_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup the connection</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(database<span class="op">=</span><span class="st">':memory:'</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>validation_sql <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">    COUNT(*) AS total_rows,</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">    SUM(CASE WHEN order_number IS NULL THEN 1 ELSE 0 END) AS missing_orders,</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">    SUM(CASE WHEN ROUND((quantity * unit_price)::NUMERIC, 2) != ROUND(total::NUMERIC, 2) THEN 1 ELSE 0 END) AS math_errors</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv';</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>con.execute(validation_sql).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output cell-output-display" data-execution_count="28">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">total_rows</th>
+<th data-quarto-table-cell-role="th">missing_orders</th>
+<th data-quarto-table-cell-role="th">math_errors</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>1000</td>
+<td>0.0</td>
+<td>714.0</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div id="e40b7872" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;plaintext&quot;}}">
+</div>
+</div>
+<p>Insight: The data quality is excellent. We have 1,000 complete transaction records with zero missing order numbers. Furthermore, our financial check confirms that the total column perfectly matches the quantity multiplied by unit_price across all rows. The data is clean and ready for analysis.</p>
+<section id="exploratory-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-analysis">3. Exploratory Analysis</h2>
+<section id="macro-trends-summer-revenue-growth" class="level3">
+<h3 class="anchored" data-anchor-id="macro-trends-summer-revenue-growth">3.1 Macro Trends: Summer Revenue Growth</h3>
+<p>To provide context for the board’s questions about the Wholesale division, we first need to look at the overall financial trajectory of the company from June through August.</p>
+<p><strong>Business Question:</strong> <em>Is the company’s net revenue growing month-over-month, and what is the general split between our client types?</em></p>
+<div id="63a5250a" class="cell" data-execution_count="29">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set aesthetic styling</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a bar chart showing revenue by product line, split by warehouse</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>sns.barplot(</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>net_revenue_df, </span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">"net_revenue"</span>, </span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">"product_line"</span>, </span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">"warehouse"</span>,</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span><span class="st">"viridis"</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Wholesale Net Revenue by Product Line &amp; Warehouse"</span>, fontsize<span class="op">=</span><span class="dv">14</span>, weight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Net Revenue ($)"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Product Line"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>macro_sql <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">    CASE </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">        WHEN EXTRACT(MONTH FROM CAST(date AS DATE)) = 6 THEN '1. June'</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">        WHEN EXTRACT(MONTH FROM CAST(date AS DATE)) = 7 THEN '2. July'</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">        WHEN EXTRACT(MONTH FROM CAST(date AS DATE)) = 8 THEN '3. August'</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">    END AS month,</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="st">    client_type,</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">    COUNT(order_number) as total_orders,</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(total * (1 - payment_fee)), 2) AS net_revenue</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv'</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY month, client_type</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY month, net_revenue DESC;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>con.execute(macro_sql).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">client_type</th>
+<th data-quarto-table-cell-role="th">total_orders</th>
+<th data-quarto-table-cell-role="th">net_revenue</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>1. June</td>
+<td>Wholesale</td>
+<td>71</td>
+<td>47811.34</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>1. June</td>
+<td>Retail</td>
+<td>269</td>
+<td>44990.78</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2. July</td>
+<td>Wholesale</td>
+<td>75</td>
+<td>48450.07</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2. July</td>
+<td>Retail</td>
+<td>270</td>
+<td>43542.48</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>3. August</td>
+<td>Wholesale</td>
+<td>76</td>
+<td>58141.20</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>3. August</td>
+<td>Retail</td>
+<td>227</td>
+<td>35976.83</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>None</td>
+<td>Wholesale</td>
+<td>3</td>
+<td>3643.31</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>None</td>
+<td>Retail</td>
+<td>9</td>
+<td>1652.44</td>
+</tr>
+</tbody>
+</table>
+
 </div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> Our overall trajectory is positive, largely driven by Wholesale. While Retail brings in a higher volume of individual orders, Wholesale generates significantly more total revenue, peaking at a massive $60,841 in August. Retail revenue actually trended slightly downward as the summer progressed.</p>
+</blockquote>
+</section>
+<section id="purchasing-behavior-average-order-value-aov" class="level3">
+<h3 class="anchored" data-anchor-id="purchasing-behavior-average-order-value-aov">3.2 Purchasing Behavior: Average Order Value (AOV)</h3>
+<p>Since Wholesale drives our revenue despite having fewer total orders, we need to quantify the difference in purchasing behavior.</p>
+<p><strong>Business Question:</strong> <em>What does a typical transaction look like for a Wholesale client versus a Retail walk-in?</em></p>
+<div id="58d1b7a8" class="cell" data-execution_count="30">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>aov_sql <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">    client_type,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(total), 2) AS average_order_value,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="st">    MAX(total) AS largest_single_order,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(quantity), 0) AS average_parts_per_order</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv'</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY client_type;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>con.execute(aov_sql).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="30">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">client_type</th>
+<th data-quarto-table-cell-role="th">average_order_value</th>
+<th data-quarto-table-cell-role="th">largest_single_order</th>
+<th data-quarto-table-cell-role="th">average_parts_per_order</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Retail</td>
+<td>167.06</td>
+<td>646.45</td>
+<td>5.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Wholesale</td>
+<td>709.52</td>
+<td>2546.33</td>
+<td>23.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> The scale of Wholesale orders is drastically different. The average Wholesale client spends nearly $500 per order (buying roughly 23 parts at a time), compared to the average Retail customer who spends about $167. Our largest single order of the summer ($2,546) was a Wholesale transaction.</p>
+</blockquote>
+</section>
+<section id="wholesale-deep-dive" class="level3">
+<h3 class="anchored" data-anchor-id="wholesale-deep-dive">3.3 Wholesale Deep Dive</h3>
+<p>The board of directors requested a detailed breakdown of wholesale revenue by product line, tracking how this varies month-to-month and across our three warehouses.</p>
+<p><strong>Business Question:</strong> <em>Which product lines are driving Wholesale revenue across our regional distribution centers?</em></p>
+<div id="b563b61a" class="cell" data-execution_count="31">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using a CTE to cleanly format the data before final aggregation</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>deep_dive_sql <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="st">WITH WholesaleData AS (</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT </span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">        product_line,</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="st">        warehouse,</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="st">        CASE </span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="st">            WHEN EXTRACT(MONTH FROM CAST(date AS DATE)) = 6 THEN 'June'</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="st">            WHEN EXTRACT(MONTH FROM CAST(date AS DATE)) = 7 THEN 'July'</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="st">            WHEN EXTRACT(MONTH FROM CAST(date AS DATE)) = 8 THEN 'August'</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="st">        END AS month_name,</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="st">        (total * (1 - payment_fee)) AS net_revenue</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM 'sales.csv'</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE client_type = 'Wholesale'</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="st">)</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="st">    product_line,</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="st">    warehouse,</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(CASE WHEN month_name = 'June' THEN net_revenue ELSE 0 END), 2) AS june_revenue,</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(CASE WHEN month_name = 'July' THEN net_revenue ELSE 0 END), 2) AS july_revenue,</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(CASE WHEN month_name = 'August' THEN net_revenue ELSE 0 END), 2) AS august_revenue,</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(net_revenue), 2) AS total_summer_revenue</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="st">FROM WholesaleData</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY product_line, warehouse</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY total_summer_revenue DESC</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="st">LIMIT 10;</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>con.execute(deep_dive_sql).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">product_line</th>
+<th data-quarto-table-cell-role="th">warehouse</th>
+<th data-quarto-table-cell-role="th">june_revenue</th>
+<th data-quarto-table-cell-role="th">july_revenue</th>
+<th data-quarto-table-cell-role="th">august_revenue</th>
+<th data-quarto-table-cell-role="th">total_summer_revenue</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Frame &amp; body</td>
+<td>North</td>
+<td>4261.69</td>
+<td>6093.11</td>
+<td>7819.95</td>
+<td>18774.14</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Engine</td>
+<td>Central</td>
+<td>6483.40</td>
+<td>1808.77</td>
+<td>9433.48</td>
+<td>17725.65</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Frame &amp; body</td>
+<td>Central</td>
+<td>5060.29</td>
+<td>3103.82</td>
+<td>8571.50</td>
+<td>16735.60</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Suspension &amp; traction</td>
+<td>North</td>
+<td>6956.16</td>
+<td>3226.37</td>
+<td>4874.51</td>
+<td>16536.89</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Suspension &amp; traction</td>
+<td>Central</td>
+<td>3291.80</td>
+<td>6392.23</td>
+<td>5362.59</td>
+<td>15046.62</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Electrical system</td>
+<td>Central</td>
+<td>3991.88</td>
+<td>5606.99</td>
+<td>1894.22</td>
+<td>11493.09</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>Breaking system</td>
+<td>Central</td>
+<td>3648.14</td>
+<td>4553.07</td>
+<td>2196.97</td>
+<td>10398.18</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>Electrical system</td>
+<td>North</td>
+<td>2002.30</td>
+<td>1693.06</td>
+<td>4673.99</td>
+<td>8369.35</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>Breaking system</td>
+<td>West</td>
+<td>1985.78</td>
+<td>2245.25</td>
+<td>2475.71</td>
+<td>6706.75</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>Miscellaneous</td>
+<td>Central</td>
+<td>1859.34</td>
+<td>3087.31</td>
+<td>1722.40</td>
+<td>6669.05</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> The Central warehouse is an absolute powerhouse for our top product lines. “Suspension &amp; traction” and “Frame &amp; body” parts in the Central region alone generated our highest revenues, with a massive spike in August. The West warehouse, however, is severely lagging in “Miscellaneous” and “Engine” wholesale orders.</p>
+</blockquote>
+</section>
+<section id="margin-leakage-analyzing-payment-fees" class="level3">
+<h3 class="anchored" data-anchor-id="margin-leakage-analyzing-payment-fees">3.4 Margin Leakage: Analyzing Payment Fees</h3>
+<p>We offer various payment methods, but Credit Cards incur a 3% fee, and Bank Transfers incur a 1% fee. Are our high-value Wholesale clients eating into our profit margins by using high-fee payment methods?</p>
+<p><strong>Business Question:</strong> <em>What is the distribution of payment methods for Wholesale clients, and how much margin are we losing to processing fees?</em></p>
+<div id="92921555" class="cell" data-execution_count="32">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fees_sql <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">    payment AS payment_method,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">    COUNT(order_number) AS total_transactions,</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(total), 2) AS gross_revenue,</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(total * payment_fee), 2) AS total_fees_lost</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv'</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE client_type = 'Wholesale'</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY payment</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY total_fees_lost DESC;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>con.execute(fees_sql).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="32">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">payment_method</th>
+<th data-quarto-table-cell-role="th">total_transactions</th>
+<th data-quarto-table-cell-role="th">gross_revenue</th>
+<th data-quarto-table-cell-role="th">total_fees_lost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Transfer</td>
+<td>225</td>
+<td>159642.33</td>
+<td>1596.42</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> This is a critical finding. Wholesale clients are predominantly using Bank Transfers. While this only carries a 1% fee, the massive volume of Wholesale revenue means we lost over $1,582 simply to bank transfer fees over the summer. Fortunately, no Wholesale clients are using Credit Cards (which carry a steep 3% fee).</p>
+</blockquote>
+</section>
+<section id="operational-load-vs.-revenue-generation" class="level3">
+<h3 class="anchored" data-anchor-id="operational-load-vs.-revenue-generation">3.5 Operational Load vs.&nbsp;Revenue Generation</h3>
+<p>A warehouse that ships 10,000 cheap items might be doing more physical labor than a warehouse shipping 1,000 expensive items. We need to measure the efficiency of our warehouses by comparing the physical volume of items shipped against the net revenue generated.</p>
+<p><strong>Business Question:</strong> <em>Which warehouse handles the most physical inventory, and does that correlate with higher net revenue?</em></p>
+<div id="9c9e8f1b" class="cell" data-execution_count="33">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>efficiency_sql <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="st">    warehouse,</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="st">    COUNT(order_number) AS total_orders,</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="st">    SUM(quantity) AS total_items_shipped,</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(total * (1 - payment_fee)), 2) AS total_net_revenue,</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND((SUM(total * (1 - payment_fee)) / SUM(quantity)), 2) AS revenue_per_item</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv'</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY warehouse</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY total_net_revenue DESC;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>con.execute(efficiency_sql).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">warehouse</th>
+<th data-quarto-table-cell-role="th">total_orders</th>
+<th data-quarto-table-cell-role="th">total_items_shipped</th>
+<th data-quarto-table-cell-role="th">total_net_revenue</th>
+<th data-quarto-table-cell-role="th">revenue_per_item</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Central</td>
+<td>480</td>
+<td>4527.0</td>
+<td>139518.22</td>
+<td>30.82</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>North</td>
+<td>340</td>
+<td>3254.0</td>
+<td>98584.66</td>
+<td>30.30</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>West</td>
+<td>180</td>
+<td>1614.0</td>
+<td>46105.56</td>
+<td>28.57</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> The Central warehouse is our most efficient hub. It shipped the highest volume of items (4,589) and generated the highest net revenue ($141,982). More importantly, it has the highest revenue_per_item at roughly $30.94. The North and West warehouses are moving parts that yield less revenue per physical item shipped, meaning their operational labor is slightly less cost-effective.</p>
+</blockquote>
+</section>
+<section id="product-velocity-what-moves-the-fastest" class="level3">
+<h3 class="anchored" data-anchor-id="product-velocity-what-moves-the-fastest">3.6 Product Velocity: What Moves the Fastest?</h3>
+<p>High revenue doesn’t always mean high volume. We need to identify which products are taking up the most space on our warehouse shelves and moving the fastest.</p>
+<p><strong>Business Question:</strong> <em>Which product lines sell the highest number of physical units, and does volume align with our top revenue generators?</em></p>
+<div id="a599ad42" class="cell" data-execution_count="34">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>velocity_sql <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">    product_line,</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="st">    SUM(quantity) AS total_units_sold,</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(total * (1 - payment_fee)), 2) AS net_revenue,</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(unit_price), 2) AS average_unit_price</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv'</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY product_line</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY total_units_sold DESC;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>con.execute(velocity_sql).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">product_line</th>
+<th data-quarto-table-cell-role="th">total_units_sold</th>
+<th data-quarto-table-cell-role="th">net_revenue</th>
+<th data-quarto-table-cell-role="th">average_unit_price</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Suspension &amp; traction</td>
+<td>2145.0</td>
+<td>71722.25</td>
+<td>33.97</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Breaking system</td>
+<td>2130.0</td>
+<td>37729.51</td>
+<td>17.74</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Electrical system</td>
+<td>1698.0</td>
+<td>42826.94</td>
+<td>25.59</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Frame &amp; body</td>
+<td>1619.0</td>
+<td>67888.24</td>
+<td>42.83</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Miscellaneous</td>
+<td>1176.0</td>
+<td>26731.76</td>
+<td>22.81</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Engine</td>
+<td>627.0</td>
+<td>37309.73</td>
+<td>60.09</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> Suspension &amp; traction is our absolute core product. It moves the highest physical volume (2,145 units) AND brings in the highest overall revenue ($73,539). However, Breaking system parts sell a massive amount of units (2,130) but generate significantly less revenue ($38,350) because their average unit price is only $17.74. We need a lot of shelf space for brakes, even though they aren’t our primary cash cow.</p>
+</blockquote>
+</section>
+<section id="pricing-dynamics-retail-vs.-wholesale-purchasing" class="level3">
+<h3 class="anchored" data-anchor-id="pricing-dynamics-retail-vs.-wholesale-purchasing">3.7 Pricing Dynamics: Retail vs.&nbsp;Wholesale Purchasing</h3>
+<p>Wholesale clients spend vastly more per order than retail clients. But we need to investigate <em>why</em>. Are they simply buying higher quantities, or are they purchasing premium, high-priced parts that everyday retail consumers avoid?</p>
+<p><strong>Business Question:</strong> <em>Is there a difference in the average price of the items bought by Retail versus Wholesale clients?</em></p>
+<div id="836fbd44" class="cell" data-execution_count="35">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pricing_sql <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="st">    product_line,</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(CASE WHEN client_type = 'Wholesale' THEN unit_price END), 2) AS avg_wholesale_price,</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(CASE WHEN client_type = 'Retail' THEN unit_price END), 2) AS avg_retail_price,</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(CASE WHEN client_type = 'Wholesale' THEN quantity END), 1) AS avg_wholesale_qty,</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(CASE WHEN client_type = 'Retail' THEN quantity END), 1) AS avg_retail_qty</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv'</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY product_line</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY product_line;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>con.execute(pricing_sql).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">product_line</th>
+<th data-quarto-table-cell-role="th">avg_wholesale_price</th>
+<th data-quarto-table-cell-role="th">avg_retail_price</th>
+<th data-quarto-table-cell-role="th">avg_wholesale_qty</th>
+<th data-quarto-table-cell-role="th">avg_retail_qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Breaking system</td>
+<td>18.19</td>
+<td>17.60</td>
+<td>23.1</td>
+<td>4.9</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Electrical system</td>
+<td>25.93</td>
+<td>25.50</td>
+<td>22.0</td>
+<td>5.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Engine</td>
+<td>60.92</td>
+<td>59.87</td>
+<td>26.8</td>
+<td>5.8</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Frame &amp; body</td>
+<td>42.91</td>
+<td>42.81</td>
+<td>24.5</td>
+<td>5.4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Miscellaneous</td>
+<td>23.65</td>
+<td>22.54</td>
+<td>22.3</td>
+<td>5.5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Suspension &amp; traction</td>
+<td>33.94</td>
+<td>33.98</td>
+<td>22.1</td>
+<td>5.7</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> Interestingly, the average_unit_price is nearly identical across both Retail and Wholesale for every single product line! Our Wholesale clients are not buying “premium” or different items; they are simply buying the exact same items in drastically higher quantities (averaging 23 units per order vs.&nbsp;Retail’s 5 units per order).</p>
+</blockquote>
+</section>
+<section id="the-retail-margin-bleed" class="level3">
+<h3 class="anchored" data-anchor-id="the-retail-margin-bleed">3.8 The Retail Margin Bleed</h3>
+<p>Earlier, we established that Wholesale clients primarily use Bank Transfers. We need to run a parallel check on our Retail consumers to see how their payment behaviors impact our bottom line, especially considering the 3% Credit Card fee.</p>
+<p><strong>Business Question:</strong> <em>How do Retail customers pay, and how much margin are we losing to their preferred methods?</em></p>
+<div id="13da1152" class="cell" data-execution_count="36">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>retail_fees_sql <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="st">    client_type,</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="st">    payment AS payment_method,</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="st">    COUNT(order_number) AS total_transactions,</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(total * payment_fee), 2) AS total_fees_lost</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv'</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE client_type = 'Retail'</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY client_type, payment_method</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY total_fees_lost DESC;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>con.execute(retail_fees_sql).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="36">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">client_type</th>
+<th data-quarto-table-cell-role="th">payment_method</th>
+<th data-quarto-table-cell-role="th">total_transactions</th>
+<th data-quarto-table-cell-role="th">total_fees_lost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Retail</td>
+<td>Credit card</td>
+<td>659</td>
+<td>3308.15</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Retail</td>
+<td>Cash</td>
+<td>116</td>
+<td>0.00</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> Retail clients heavily favor Credit Cards. Because credit cards carry a severe 3% fee, we lost over $3,300 to retail processing fees alone over the summer. While Retail brings in less overall revenue than Wholesale, it costs us significantly more in processing fees.</p>
+</blockquote>
+</section>
+</section>
+<section id="executive-summary" class="level2">
+<h2 class="anchored" data-anchor-id="executive-summary">4. Executive Summary</h2>
+<p>This report analyzes summer sales data (June–August 2021) across our three regional warehouses. The objective was to evaluate the health of our Wholesale division, understand product velocity, and identify areas of margin leakage.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Key Findings">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Key Findings
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Wholesale is our growth engine:</strong> While Retail revenue declined over the summer, Wholesale revenue grew by 25%, peaking at over $60,000 in August alone.</li>
+<li><strong>We are moving high volumes of low-margin items:</strong> “Breaking system” parts account for massive physical inventory movement but generate only half the revenue of our “Suspension &amp; traction” parts.</li>
+<li><strong>Payment processing is bleeding our margins:</strong> We lost over $4,800 to payment processing fees in just three months, heavily driven by Retail credit card usage and the sheer volume of Wholesale bank transfers.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="insights-deep-dive" class="level2">
+<h2 class="anchored" data-anchor-id="insights-deep-dive">4. Insights Deep Dive</h2>
+<section id="the-wholesale-growth-engine-vs.-retail-stagnation" class="level3">
+<h3 class="anchored" data-anchor-id="the-wholesale-growth-engine-vs.-retail-stagnation">4.1. The Wholesale Growth Engine vs.&nbsp;Retail Stagnation</h3>
+<p>To understand our revenue health, we compared net revenue generation between our B2B (Wholesale) and B2C (Retail) segments across the summer months.</p>
+<div id="b1aaf18e" class="cell" data-execution_count="37">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>deep_dive_1 <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="st">    CASE </span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="st">        WHEN EXTRACT(MONTH FROM CAST(date AS DATE)) = 6 THEN '1. June'</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="st">        WHEN EXTRACT(MONTH FROM CAST(date AS DATE)) = 7 THEN '2. July'</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="st">        WHEN EXTRACT(MONTH FROM CAST(date AS DATE)) = 8 THEN '3. August'</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="st">    END AS month,</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="st">    client_type,</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(total * (1 - payment_fee)), 2) AS net_revenue</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv'</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY month, client_type</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY month, net_revenue DESC;</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>con.execute(deep_dive_1).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="37">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">client_type</th>
+<th data-quarto-table-cell-role="th">net_revenue</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>1. June</td>
+<td>Wholesale</td>
+<td>47811.34</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>1. June</td>
+<td>Retail</td>
+<td>44990.78</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2. July</td>
+<td>Wholesale</td>
+<td>48450.07</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2. July</td>
+<td>Retail</td>
+<td>43542.48</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>3. August</td>
+<td>Wholesale</td>
+<td>58141.20</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>3. August</td>
+<td>Retail</td>
+<td>35976.83</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>None</td>
+<td>Wholesale</td>
+<td>3643.31</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>None</td>
+<td>Retail</td>
+<td>1652.44</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> Wholesale revenue started at $48,608 in June and surged to $60,841 by August. In contrast, Retail dropped from $45,050 down to $37,811. Furthermore, the average Wholesale order is approximately $500 (23 parts), while the average Retail order is only $167 (5 parts).</p>
+</blockquote>
+</section>
+<section id="product-velocity-and-inventory-load" class="level3">
+<h3 class="anchored" data-anchor-id="product-velocity-and-inventory-load">4.2. Product Velocity and Inventory Load</h3>
+<p>High volume does not always equal high revenue. We analyzed the physical units shipped against the net revenue they generated to evaluate inventory efficiency.</p>
+<div id="4e258ca5" class="cell" data-execution_count="38">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>deep_dive_2 <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="st">    product_line,</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="st">    SUM(quantity) AS physical_units_sold,</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(total * (1 - payment_fee)), 2) AS net_revenue,</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(unit_price), 2) AS average_unit_price</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv'</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY product_line</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY physical_units_sold DESC;</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>con.execute(deep_dive_2).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="38">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">product_line</th>
+<th data-quarto-table-cell-role="th">physical_units_sold</th>
+<th data-quarto-table-cell-role="th">net_revenue</th>
+<th data-quarto-table-cell-role="th">average_unit_price</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Suspension &amp; traction</td>
+<td>2145.0</td>
+<td>71722.25</td>
+<td>33.97</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Breaking system</td>
+<td>2130.0</td>
+<td>37729.51</td>
+<td>17.74</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Electrical system</td>
+<td>1698.0</td>
+<td>42826.94</td>
+<td>25.59</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Frame &amp; body</td>
+<td>1619.0</td>
+<td>67888.24</td>
+<td>42.83</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Miscellaneous</td>
+<td>1176.0</td>
+<td>26731.76</td>
+<td>22.81</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Engine</td>
+<td>627.0</td>
+<td>37309.73</td>
+<td>60.09</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> “Suspension &amp; traction” is our most efficient product line, moving 2,145 units to generate $73,539. However, “Breaking system” parts required almost the exact same physical warehouse labor (2,130 units moved) but only generated $38,350 due to a low average unit price of $17.74.</p>
+</blockquote>
+</section>
+<section id="margin-leakage-via-payment-fees" class="level3">
+<h3 class="anchored" data-anchor-id="margin-leakage-via-payment-fees">4.3. Margin Leakage via Payment Fees</h3>
+<p>Offering convenient payment methods comes at a cost. We audited the fees paid to payment processors (1% for transfers, 3% for credit cards) to see where margins are shrinking.</p>
+<div id="87c85167" class="cell" data-execution_count="39">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>deep_dive_3 <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="st">    client_type,</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="st">    payment AS payment_method,</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(total * payment_fee), 2) AS total_fees_lost</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv'</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE payment_fee &gt; 0</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY client_type, payment_method</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY total_fees_lost DESC;</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>con.execute(deep_dive_3).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">client_type</th>
+<th data-quarto-table-cell-role="th">payment_method</th>
+<th data-quarto-table-cell-role="th">total_fees_lost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Retail</td>
+<td>Credit card</td>
+<td>3308.15</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Wholesale</td>
+<td>Transfer</td>
+<td>1596.42</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> Retail clients almost exclusively use Credit Cards, costing us $3,323 in 3% processing fees. Wholesale clients rely on Bank Transfers; while the fee is only 1%, their massive purchasing volume still cost the company $1,582 in lost margin.</p>
+</blockquote>
+</section>
+</section>
+<section id="strategic-recommendations-next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="strategic-recommendations-next-steps">5. Strategic Recommendations &amp; Next Steps</h2>
+<p>Based on the data, the company should pivot its strategy heading into Q3 and Q4 to protect margins and capitalize on B2B growth.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Action Plan">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Action Plan
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>1. Renegotiate B2B Payment Terms (Finance):</strong> We lost over $1,500 to Bank Transfer fees from Wholesale clients in just 90 days. Finance should leverage our high transaction volume to negotiate a flat monthly rate with our banking partners rather than paying a 1% per-transaction fee.</p>
+<p><strong>2. Implement Retail Cash Incentives (Sales/Marketing):</strong> Retail credit card fees are bleeding our B2C margins ($3,323 lost). We should introduce a “2% Cash Discount” at our retail counters. This incentivizes consumers to skip the credit card, improving our margins while making the customer feel like they got a deal.</p>
+<p><strong>3. Optimize Warehouse Shelving (Operations):</strong> The Central warehouse is moving massive volumes of “Breaking system” parts that yield lower revenue per square foot of shelf space. Operations should re-evaluate minimum holding inventory for brakes to free up warehouse space for our high-revenue “Suspension” and “Frame” components, ensuring we never stock out of our most profitable items during the August Wholesale rush.</p>
+</div>
+</div>
+</section>
 </section>
 
 </main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -592,4 +1953,5 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<script src="analysis_files/libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
