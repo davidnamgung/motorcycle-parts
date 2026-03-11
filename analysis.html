@@ -326,6 +326,7 @@ window.Quarto = {
   <li><a href="#margin-leakage-via-payment-fees" id="toc-margin-leakage-via-payment-fees" class="nav-link" data-scroll-target="#margin-leakage-via-payment-fees">4.3. Margin Leakage via Payment Fees</a></li>
   </ul></li>
   <li><a href="#strategic-recommendations-next-steps" id="toc-strategic-recommendations-next-steps" class="nav-link" data-scroll-target="#strategic-recommendations-next-steps">5. Strategic Recommendations &amp; Next Steps</a></li>
+  <li><a href="#caveats-analytical-limitations" id="toc-caveats-analytical-limitations" class="nav-link" data-scroll-target="#caveats-analytical-limitations">6. Caveats &amp; Analytical Limitations</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -1515,19 +1516,31 @@ window.Quarto = {
 <section id="strategic-recommendations-next-steps" class="level2">
 <h2 class="anchored" data-anchor-id="strategic-recommendations-next-steps">5. Strategic Recommendations &amp; Next Steps</h2>
 <p>Based on the data, the company should pivot its strategy heading into Q3 and Q4 to protect margins and capitalize on B2B growth.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Action Plan">
+<blockquote class="blockquote">
+<p>[!TIP] <strong>Action Plan</strong> <strong>1. Renegotiate B2B Payment Terms (Finance):</strong> We lost over $1,500 to Bank Transfer fees from Wholesale clients in just 90 days. Finance should leverage our high transaction volume to negotiate a flat monthly rate with our banking partners rather than paying a 1% per-transaction fee.</p>
+</blockquote>
+<p><strong>2. Implement Retail Cash Incentives (Sales/Marketing):</strong> Retail credit card fees are bleeding our B2C margins ($3,323 lost). We should introduce a “2% Cash Discount” at our retail counters. This incentivizes consumers to skip the credit card, improving our margins while making the customer feel like they got a deal.</p>
+<p><strong>3. Optimize Warehouse Shelving (Operations):</strong> The Central warehouse is moving massive volumes of “Breaking system” parts that yield lower revenue per square foot of shelf space. Operations should re-evaluate minimum holding inventory for brakes to free up warehouse space for our high-revenue “Suspension” and “Frame” components, ensuring we never stock out of our most profitable items during the August Wholesale rush.</p>
+</section>
+<section id="caveats-analytical-limitations" class="level2">
+<h2 class="anchored" data-anchor-id="caveats-analytical-limitations">6. Caveats &amp; Analytical Limitations</h2>
+<div class="callout callout-style-default callout-warning callout-titled" title="Data Blind Spots &amp; Assumptions">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Action Plan
+<span class="screen-reader-only">Warning</span>Data Blind Spots &amp; Assumptions
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>1. Renegotiate B2B Payment Terms (Finance):</strong> We lost over $1,500 to Bank Transfer fees from Wholesale clients in just 90 days. Finance should leverage our high transaction volume to negotiate a flat monthly rate with our banking partners rather than paying a 1% per-transaction fee.</p>
-<p><strong>2. Implement Retail Cash Incentives (Sales/Marketing):</strong> Retail credit card fees are bleeding our B2C margins ($3,323 lost). We should introduce a “2% Cash Discount” at our retail counters. This incentivizes consumers to skip the credit card, improving our margins while making the customer feel like they got a deal.</p>
-<p><strong>3. Optimize Warehouse Shelving (Operations):</strong> The Central warehouse is moving massive volumes of “Breaking system” parts that yield lower revenue per square foot of shelf space. Operations should re-evaluate minimum holding inventory for brakes to free up warehouse space for our high-revenue “Suspension” and “Frame” components, ensuring we never stock out of our most profitable items during the August Wholesale rush.</p>
+<p>Every data project has limitations. For full transparency, stakeholders should be aware of the following constraints within this dataset before executing the recommended strategies:</p>
+<ul>
+<li><strong>Missing Cost of Goods Sold (COGS):</strong> This analysis successfully calculates <em>Net Revenue</em> by deducting payment processing fees. However, because the dataset does not include the base cost the company pays its suppliers for the parts, we cannot calculate true <em>Net Profit</em> margins.</li>
+<li><strong>Limited Time Horizon:</strong> The data exclusively covers a three-month summer window (June–August 2021). We cannot confidently predict annual seasonality, such as whether Retail sales traditionally spike in the spring or if the August Wholesale rush is an anomaly.</li>
+<li><strong>Absence of Customer Identifiers:</strong> Without unique Customer IDs linked to the order numbers, we cannot differentiate between one-time buyers and loyal repeat mechanics. This prevents us from calculating Customer Lifetime Value (CLV) or retention rates.</li>
+<li><strong>Hidden Logistical Costs:</strong> The operational efficiency metrics assume that moving a physical unit costs the same across all three warehouses. The data does not account for variable regional shipping costs, labor rates, or return rates, which could alter the true profitability of the Central warehouse.</li>
+</ul>
 </div>
 </div>
 </section>
