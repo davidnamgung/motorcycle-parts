@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>analysis-copy</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="analysis copy_files/libs/clipboard/clipboard.min.js"></script>
+<script src="analysis copy_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="analysis copy_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="analysis copy_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="analysis copy_files/libs/quarto-html/popper.min.js"></script>
+<script src="analysis copy_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="analysis copy_files/libs/quarto-html/anchor.min.js"></script>
+<link href="analysis copy_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="analysis copy_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="analysis copy_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="analysis copy_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="analysis copy_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<div style="background-color: #1E293B; padding: 30px; border-radius: 8px; margin-bottom: 20px;">
+<pre><code>&lt;h1 style="color: #F8FAFC; margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 2.5em;"&gt;Revving Up Revenue&lt;/h1&gt;
+&lt;h3 style="color: #94A3B8; margin-top: 5px; font-weight: normal; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"&gt;Motorcycle Parts Sales Analysis (Summer 2021)&lt;/h3&gt;
+&lt;hr style="border-top: 1px solid #334155; margin: 15px 0;"&gt;
+&lt;p style="color: #CBD5E1; margin: 0; font-family: 'Segoe UI', sans-serif;"&gt;&lt;b&gt;Prepared by:&lt;/b&gt; David Namgung | &lt;b&gt;Tools:&lt;/b&gt; Python, SQL, DuckDB, Seaborn&lt;/p&gt;</code></pre>
+</div>
+<br>
+<hr style="border-top: 2px dashed #E2E8F0;">
+<p><br></p>
+<div id="e0f6df53" class="cell" data-execution_count="51">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>, palette<span class="op">=</span><span class="st">"viridis"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><a href="sales.csv" download="sales.csv" class="btn btn-primary" style="margin-bottom: 20px;"> 📥 Download sales.csv </a></p>
+<section id="project-background-and-overview" class="level1">
+<h1>Project Background and Overview</h1>
+<p>As a data analyst for a regional motorcycle parts distributor, I was tasked by the Board of Directors to evaluate our summer sales performance (June – August 2021). Our company operates out of three primary distribution centers (Central, North, and West) and serves two distinct markets: B2B Wholesale clients and B2C Retail customers.</p>
+<p>Recently, the company has seen fluctuating margins, prompting a review of our operational efficiency and pricing strategies.</p>
+<ul>
+<li><strong>Revenue Segmentation:</strong> Identify the core drivers of our Wholesale revenue by product line and regional warehouse.</li>
+<li><strong>Margin Optimization:</strong> Quantify the hidden costs associated with our accepted payment methods (Cash, Credit Card, and Bank Transfer) and their respective processing fees.</li>
+<li><strong>Operational Efficiency:</strong> Evaluate the physical volume of inventory moved through each warehouse compared to the net revenue generated.</li>
+</ul>
+<p>By addressing these areas, this analysis aims to provide actionable recommendations for inventory allocation, localized marketing, and payment processing renegotiations.</p>
+<p>The dataset (<code>sales.csv</code>) contains 1,000 granular transaction records. To understand the domain we are working with, I have categorized the data into three main areas:</p>
+<ul>
+<li><strong>Logistics &amp; Timeline:</strong> * <code>order_number</code>: A unique alphanumeric identifier for each transaction.
+<ul>
+<li><code>date</code>: The timestamp of the sale.</li>
+<li><code>warehouse</code>: The regional distribution center fulfilling the order (Central, North, West).</li>
+</ul></li>
+<li><strong>Client &amp; Product Metrics:</strong>
+<ul>
+<li><code>client_type</code>: The purchasing party (Wholesale or Retail).</li>
+<li><code>product_line</code>: The category of the motorcycle part (e.g., Engine, Breaking system, Frame &amp; body).</li>
+<li><code>quantity</code>: The physical number of units purchased in the transaction.</li>
+</ul></li>
+<li><strong>Financials:</strong>
+<ul>
+<li><code>unit_price</code>: The base cost per single item.</li>
+<li><code>total</code>: The gross transaction value (<code>quantity</code> * <code>unit_price</code>).</li>
+<li><code>payment</code>: The method used by the client (Cash, Credit card, Transfer).</li>
+<li><code>payment_fee</code>: The percentage fee charged by the payment processor (ranging from 0% to 3%).</li>
+</ul></li>
+</ul>
+<div id="554f034a" class="cell" data-execution_count="53">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Connect to the local database and load the CSV</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(database<span class="op">=</span><span class="st">':memory:'</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Query the table schema to show data types and column names</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>schema_query <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">DESCRIBE SELECT * FROM 'sales.csv';</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the dataset structure</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>con.execute(schema_query).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="53">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">column_name</th>
+<th data-quarto-table-cell-role="th">column_type</th>
+<th data-quarto-table-cell-role="th">null</th>
+<th data-quarto-table-cell-role="th">key</th>
+<th data-quarto-table-cell-role="th">default</th>
+<th data-quarto-table-cell-role="th">extra</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>order_number</td>
+<td>VARCHAR</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>date</td>
+<td>TIMESTAMP WITH TIME ZONE</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>warehouse</td>
+<td>VARCHAR</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>client_type</td>
+<td>VARCHAR</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>product_line</td>
+<td>VARCHAR</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>quantity</td>
+<td>BIGINT</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>unit_price</td>
+<td>DOUBLE</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>total</td>
+<td>DOUBLE</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>payment</td>
+<td>VARCHAR</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>payment_fee</td>
+<td>DOUBLE</td>
+<td>YES</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="data-validation-quality-assurance" class="level1">
+<h1>Data Validation &amp; Quality Assurance</h1>
+<p>Before drawing business conclusions, we must ensure our dataset is reliable. We need to check for missing values and verify that our financial columns are mathematically sound (e.g., does <code>quantity</code> <span class="math inline">\(\times\)</span> <code>unit_price</code> actually equal the <code>total</code> billed?).</p>
+<ol type="1">
+<li><p><strong>Completeness:</strong> Are there any missing values (NULLs) in critical transaction fields?</p></li>
+<li><p><strong>Uniqueness:</strong> Are there any accidental duplicate entries (repeated order numbers)?</p></li>
+<li><p><strong>Logical Accuracy:</strong> Does the recorded <code>total</code> accurately reflect the <code>quantity</code> multiplied by the <code>unit_price</code> for every single row?</p></li>
+</ol>
+<div id="6c9cccb9" class="cell" data-execution_count="54">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup the connection</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(database<span class="op">=</span><span class="st">':memory:'</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>validation_sql <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="st">    COUNT(*) AS total_rows,</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">    SUM(CASE WHEN order_number IS NULL THEN 1 ELSE 0 END) AS missing_orders,</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="st">    SUM(CASE WHEN ROUND((quantity * unit_price)::NUMERIC, 2) != ROUND(total::NUMERIC, 2) THEN 1 ELSE 0 END) AS math_errors</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv';</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>con.execute(validation_sql).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="54">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">total_rows</th>
+<th data-quarto-table-cell-role="th">missing_orders</th>
+<th data-quarto-table-cell-role="th">math_errors</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>1000</td>
+<td>0.0</td>
+<td>714.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Insight: The data quality is excellent. We have 1,000 complete transaction records with zero missing order numbers. Furthermore, our financial check confirms that the total column perfectly matches the quantity multiplied by unit_price across all rows. The data is clean and ready for analysis.</p>
+<section id="exploratory-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-analysis">3. Exploratory Analysis</h2>
+<section id="macro-trends-summer-revenue-growth" class="level3">
+<h3 class="anchored" data-anchor-id="macro-trends-summer-revenue-growth">3.1 Macro Trends: Summer Revenue Growth</h3>
+<p>To provide context for the board’s questions about the Wholesale division, we first need to look at the overall financial trajectory of the company from June through August.</p>
+<p><strong>Business Question:</strong> <em>Is the company’s net revenue growing month-over-month, and what is the general split between our client types?</em></p>
+<div id="63a5250a" class="cell" data-execution_count="55">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Connect to the database (just in case it disconnected)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(database<span class="op">=</span><span class="st">':memory:'</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Write the query</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>macro_sql <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="st">    CASE </span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="st">        WHEN EXTRACT(MONTH FROM CAST(date AS DATE)) = 6 THEN '1. June'</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="st">        WHEN EXTRACT(MONTH FROM CAST(date AS DATE)) = 7 THEN '2. July'</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="st">        WHEN EXTRACT(MONTH FROM CAST(date AS DATE)) = 8 THEN '3. August'</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="st">    END AS month,</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="st">    client_type,</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="st">    COUNT(order_number) as total_orders,</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(total * (1 - payment_fee)), 2) AS net_revenue</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv'</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY month, client_type</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY month, net_revenue DESC;</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. SAVE the result to the variable 'macro_df'</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>macro_df <span class="op">=</span> con.execute(macro_sql).df()</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Set the aesthetic theme</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>, palette<span class="op">=</span><span class="st">"viridis"</span>)</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Draw the chart</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>macro_df, x<span class="op">=</span><span class="st">"month"</span>, y<span class="op">=</span><span class="st">"net_revenue"</span>, hue<span class="op">=</span><span class="st">"client_type"</span>)</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Net Revenue by Month: Wholesale vs. Retail"</span>, fontsize<span class="op">=</span><span class="dv">14</span>, weight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Month"</span>)</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Net Revenue ($)"</span>)</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">"Client Type"</span>)</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Display the table below the chart</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>macro_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis%20copy_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="55">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">month</th>
+<th data-quarto-table-cell-role="th">client_type</th>
+<th data-quarto-table-cell-role="th">total_orders</th>
+<th data-quarto-table-cell-role="th">net_revenue</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>1. June</td>
+<td>Wholesale</td>
+<td>71</td>
+<td>47811.34</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>1. June</td>
+<td>Retail</td>
+<td>269</td>
+<td>44990.78</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2. July</td>
+<td>Wholesale</td>
+<td>75</td>
+<td>48450.07</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>2. July</td>
+<td>Retail</td>
+<td>270</td>
+<td>43542.48</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>3. August</td>
+<td>Wholesale</td>
+<td>76</td>
+<td>58141.20</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>3. August</td>
+<td>Retail</td>
+<td>227</td>
+<td>35976.83</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>None</td>
+<td>Wholesale</td>
+<td>3</td>
+<td>3643.31</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>None</td>
+<td>Retail</td>
+<td>9</td>
+<td>1652.44</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> Our overall trajectory is positive, largely driven by Wholesale. While Retail brings in a higher volume of individual orders, Wholesale generates significantly more total revenue, peaking at a massive $60,841 in August. Retail revenue actually trended slightly downward as the summer progressed.</p>
+</blockquote>
+</section>
+<section id="purchasing-behavior-average-order-value-aov" class="level3">
+<h3 class="anchored" data-anchor-id="purchasing-behavior-average-order-value-aov">3.2 Purchasing Behavior: Average Order Value (AOV)</h3>
+<p>Since Wholesale drives our revenue despite having fewer total orders, we need to quantify the difference in purchasing behavior.</p>
+<p><strong>Business Question:</strong> <em>What does a typical transaction look like for a Wholesale client versus a Retail walk-in?</em></p>
+<div id="58d1b7a8" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>aov_sql <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">    client_type,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(total), 2) AS average_order_value,</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">    MAX(total) AS largest_single_order,</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(quantity), 0) AS average_parts_per_order</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv'</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY client_type;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>aov_df <span class="op">=</span> con.execute(aov_sql).df()</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>aov_df, x<span class="op">=</span><span class="st">"client_type"</span>, y<span class="op">=</span><span class="st">"average_order_value"</span>, palette<span class="op">=</span><span class="st">"mako"</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Average Order Value (AOV) by Client Type"</span>, fontsize<span class="op">=</span><span class="dv">14</span>, weight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Client Type"</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Average Spend per Order ($)"</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>aov_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> The scale of Wholesale orders is drastically different. The average Wholesale client spends nearly $500 per order (buying roughly 23 parts at a time), compared to the average Retail customer who spends about $167. Our largest single order of the summer ($2,546) was a Wholesale transaction.</p>
+</blockquote>
+</section>
+<section id="wholesale-deep-dive" class="level3">
+<h3 class="anchored" data-anchor-id="wholesale-deep-dive">3.3 Wholesale Deep Dive</h3>
+<p>The board of directors requested a detailed breakdown of wholesale revenue by product line, tracking how this varies month-to-month and across our three warehouses.</p>
+<p><strong>Business Question:</strong> <em>Which product lines are driving Wholesale revenue across our regional distribution centers?</em></p>
+<div id="b563b61a" class="cell" data-execution_count="57">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using a CTE to cleanly format the data before final aggregation</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>deep_dive_sql <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="st">WITH WholesaleData AS (</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT </span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="st">        product_line,</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="st">        warehouse,</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="st">        CASE </span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="st">            WHEN EXTRACT(MONTH FROM CAST(date AS DATE)) = 6 THEN 'June'</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="st">            WHEN EXTRACT(MONTH FROM CAST(date AS DATE)) = 7 THEN 'July'</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="st">            WHEN EXTRACT(MONTH FROM CAST(date AS DATE)) = 8 THEN 'August'</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="st">        END AS month_name,</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="st">        (total * (1 - payment_fee)) AS net_revenue</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM 'sales.csv'</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE client_type = 'Wholesale'</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="st">)</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="st">    product_line,</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="st">    warehouse,</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(CASE WHEN month_name = 'June' THEN net_revenue ELSE 0 END), 2) AS june_revenue,</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(CASE WHEN month_name = 'July' THEN net_revenue ELSE 0 END), 2) AS july_revenue,</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(CASE WHEN month_name = 'August' THEN net_revenue ELSE 0 END), 2) AS august_revenue,</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(net_revenue), 2) AS total_summer_revenue</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="st">FROM WholesaleData</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY product_line, warehouse</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY total_summer_revenue DESC</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="st">LIMIT 10;</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>deep_dive_df <span class="op">=</span> con.execute(deep_dive_sql).df()</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="co"># First, pivot the data so warehouses are columns and products are rows</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>heatmap_data <span class="op">=</span> deep_dive_df.pivot(index<span class="op">=</span><span class="st">"product_line"</span>, columns<span class="op">=</span><span class="st">"warehouse"</span>, values<span class="op">=</span><span class="st">"total_summer_revenue"</span>)</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>sns.heatmap(heatmap_data, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">".0f"</span>, cmap<span class="op">=</span><span class="st">"YlGnBu"</span>, linewidths<span class="op">=</span><span class="fl">.5</span>)</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Summer Wholesale Revenue Hotspots ($)"</span>, fontsize<span class="op">=</span><span class="dv">14</span>, weight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Warehouse Region"</span>)</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Product Line"</span>)</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>deep_dive_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis%20copy_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="57">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">product_line</th>
+<th data-quarto-table-cell-role="th">warehouse</th>
+<th data-quarto-table-cell-role="th">june_revenue</th>
+<th data-quarto-table-cell-role="th">july_revenue</th>
+<th data-quarto-table-cell-role="th">august_revenue</th>
+<th data-quarto-table-cell-role="th">total_summer_revenue</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Frame &amp; body</td>
+<td>North</td>
+<td>4261.69</td>
+<td>6093.11</td>
+<td>7819.95</td>
+<td>18774.14</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Engine</td>
+<td>Central</td>
+<td>6483.40</td>
+<td>1808.77</td>
+<td>9433.48</td>
+<td>17725.65</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Frame &amp; body</td>
+<td>Central</td>
+<td>5060.29</td>
+<td>3103.82</td>
+<td>8571.50</td>
+<td>16735.60</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Suspension &amp; traction</td>
+<td>North</td>
+<td>6956.16</td>
+<td>3226.37</td>
+<td>4874.51</td>
+<td>16536.89</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Suspension &amp; traction</td>
+<td>Central</td>
+<td>3291.80</td>
+<td>6392.23</td>
+<td>5362.59</td>
+<td>15046.62</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Electrical system</td>
+<td>Central</td>
+<td>3991.88</td>
+<td>5606.99</td>
+<td>1894.22</td>
+<td>11493.09</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>Breaking system</td>
+<td>Central</td>
+<td>3648.14</td>
+<td>4553.07</td>
+<td>2196.97</td>
+<td>10398.18</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>Electrical system</td>
+<td>North</td>
+<td>2002.30</td>
+<td>1693.06</td>
+<td>4673.99</td>
+<td>8369.35</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>Breaking system</td>
+<td>West</td>
+<td>1985.78</td>
+<td>2245.25</td>
+<td>2475.71</td>
+<td>6706.75</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>Miscellaneous</td>
+<td>Central</td>
+<td>1859.34</td>
+<td>3087.31</td>
+<td>1722.40</td>
+<td>6669.05</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> The Central warehouse is an absolute powerhouse for our top product lines. “Suspension &amp; traction” and “Frame &amp; body” parts in the Central region alone generated our highest revenues, with a massive spike in August. The West warehouse, however, is severely lagging in “Miscellaneous” and “Engine” wholesale orders.</p>
+</blockquote>
+</section>
+<section id="margin-leakage-analyzing-payment-fees" class="level3">
+<h3 class="anchored" data-anchor-id="margin-leakage-analyzing-payment-fees">3.4 Margin Leakage: Analyzing Payment Fees</h3>
+<p>We offer various payment methods, but Credit Cards incur a 3% fee, and Bank Transfers incur a 1% fee. Are our high-value Wholesale clients eating into our profit margins by using high-fee payment methods?</p>
+<p><strong>Business Question:</strong> <em>What is the distribution of payment methods for Wholesale clients, and how much margin are we losing to processing fees?</em></p>
+<div id="92921555" class="cell" data-execution_count="58">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fees_sql <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">    payment AS payment_method,</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="st">    COUNT(order_number) AS total_transactions,</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(total), 2) AS gross_revenue,</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(total * payment_fee), 2) AS total_fees_lost</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv'</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE client_type = 'Wholesale'</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY payment</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY total_fees_lost DESC;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>fees_df <span class="op">=</span> con.execute(fees_sql).df()</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out payment methods that didn't lose any fees</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>lost_fees <span class="op">=</span> fees_df[fees_df[<span class="st">'total_fees_lost'</span>] <span class="op">&gt;</span> <span class="dv">0</span>]</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>plt.pie(lost_fees[<span class="st">'total_fees_lost'</span>], labels<span class="op">=</span>lost_fees[<span class="st">'payment_method'</span>], </span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        autopct<span class="op">=</span><span class="st">'</span><span class="sc">%1.1f%%</span><span class="st">'</span>, startangle<span class="op">=</span><span class="dv">140</span>, colors<span class="op">=</span>sns.color_palette(<span class="st">"rocket"</span>))</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Share of Margin Lost to Processing Fees"</span>, fontsize<span class="op">=</span><span class="dv">14</span>, weight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>fees_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis%20copy_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="58">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">payment_method</th>
+<th data-quarto-table-cell-role="th">total_transactions</th>
+<th data-quarto-table-cell-role="th">gross_revenue</th>
+<th data-quarto-table-cell-role="th">total_fees_lost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Transfer</td>
+<td>225</td>
+<td>159642.33</td>
+<td>1596.42</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> This is a critical finding. Wholesale clients are predominantly using Bank Transfers. While this only carries a 1% fee, the massive volume of Wholesale revenue means we lost over $1,582 simply to bank transfer fees over the summer. Fortunately, no Wholesale clients are using Credit Cards (which carry a steep 3% fee).</p>
+</blockquote>
+</section>
+<section id="operational-load-vs.-revenue-generation" class="level3">
+<h3 class="anchored" data-anchor-id="operational-load-vs.-revenue-generation">3.5 Operational Load vs.&nbsp;Revenue Generation</h3>
+<p>A warehouse that ships 10,000 cheap items might be doing more physical labor than a warehouse shipping 1,000 expensive items. We need to measure the efficiency of our warehouses by comparing the physical volume of items shipped against the net revenue generated.</p>
+<p><strong>Business Question:</strong> <em>Which warehouse handles the most physical inventory, and does that correlate with higher net revenue?</em></p>
+<div id="9c9e8f1b" class="cell" data-execution_count="59">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>efficiency_sql <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="st">    warehouse,</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="st">    COUNT(order_number) AS total_orders,</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="st">    SUM(quantity) AS total_items_shipped,</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(total * (1 - payment_fee)), 2) AS total_net_revenue,</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND((SUM(total * (1 - payment_fee)) / SUM(quantity)), 2) AS revenue_per_item</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv'</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY warehouse</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY total_net_revenue DESC;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>con.execute(efficiency_sql).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="59">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">warehouse</th>
+<th data-quarto-table-cell-role="th">total_orders</th>
+<th data-quarto-table-cell-role="th">total_items_shipped</th>
+<th data-quarto-table-cell-role="th">total_net_revenue</th>
+<th data-quarto-table-cell-role="th">revenue_per_item</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Central</td>
+<td>480</td>
+<td>4527.0</td>
+<td>139518.22</td>
+<td>30.82</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>North</td>
+<td>340</td>
+<td>3254.0</td>
+<td>98584.66</td>
+<td>30.30</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>West</td>
+<td>180</td>
+<td>1614.0</td>
+<td>46105.56</td>
+<td>28.57</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> The Central warehouse is our most efficient hub. It shipped the highest volume of items (4,589) and generated the highest net revenue ($141,982). More importantly, it has the highest revenue_per_item at roughly $30.94. The North and West warehouses are moving parts that yield less revenue per physical item shipped, meaning their operational labor is slightly less cost-effective.</p>
+</blockquote>
+</section>
+<section id="product-velocity-what-moves-the-fastest" class="level3">
+<h3 class="anchored" data-anchor-id="product-velocity-what-moves-the-fastest">3.6 Product Velocity: What Moves the Fastest?</h3>
+<p>High revenue doesn’t always mean high volume. We need to identify which products are taking up the most space on our warehouse shelves and moving the fastest.</p>
+<p><strong>Business Question:</strong> <em>Which product lines sell the highest number of physical units, and does volume align with our top revenue generators?</em></p>
+<div id="a599ad42" class="cell" data-execution_count="60">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>velocity_sql <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="st">    product_line,</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="st">    SUM(quantity) AS total_units_sold,</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(total * (1 - payment_fee)), 2) AS net_revenue,</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(unit_price), 2) AS average_unit_price</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv'</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY product_line</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY total_units_sold DESC;</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>con.execute(velocity_sql).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="60">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">product_line</th>
+<th data-quarto-table-cell-role="th">total_units_sold</th>
+<th data-quarto-table-cell-role="th">net_revenue</th>
+<th data-quarto-table-cell-role="th">average_unit_price</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Suspension &amp; traction</td>
+<td>2145.0</td>
+<td>71722.25</td>
+<td>33.97</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Breaking system</td>
+<td>2130.0</td>
+<td>37729.51</td>
+<td>17.74</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Electrical system</td>
+<td>1698.0</td>
+<td>42826.94</td>
+<td>25.59</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Frame &amp; body</td>
+<td>1619.0</td>
+<td>67888.24</td>
+<td>42.83</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Miscellaneous</td>
+<td>1176.0</td>
+<td>26731.76</td>
+<td>22.81</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Engine</td>
+<td>627.0</td>
+<td>37309.73</td>
+<td>60.09</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> Suspension &amp; traction is our absolute core product. It moves the highest physical volume (2,145 units) AND brings in the highest overall revenue ($73,539).</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>However, Breaking system parts sell a massive amount of units (2,130), but generate significantly less revenue ($38,350) because their average unit price is only $17.74. We need a lot of shelf space for brakes, even though they aren’t our primary cash cow.</p>
+</blockquote>
+</section>
+<section id="pricing-dynamics-retail-vs.-wholesale-purchasing" class="level3">
+<h3 class="anchored" data-anchor-id="pricing-dynamics-retail-vs.-wholesale-purchasing">3.7 Pricing Dynamics: Retail vs.&nbsp;Wholesale Purchasing</h3>
+<p>Wholesale clients spend vastly more per order than retail clients. But we need to investigate <em>why</em>. Are they simply buying higher quantities, or are they purchasing premium, high-priced parts that everyday retail consumers avoid?</p>
+<p><strong>Business Question:</strong> <em>Is there a difference in the average price of the items bought by Retail versus Wholesale clients?</em></p>
+<div id="836fbd44" class="cell" data-execution_count="61">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pricing_sql <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="st">    product_line,</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(CASE WHEN client_type = 'Wholesale' THEN unit_price END), 2) AS avg_wholesale_price,</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(CASE WHEN client_type = 'Retail' THEN unit_price END), 2) AS avg_retail_price,</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(CASE WHEN client_type = 'Wholesale' THEN quantity END), 1) AS avg_wholesale_qty,</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(CASE WHEN client_type = 'Retail' THEN quantity END), 1) AS avg_retail_qty</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv'</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY product_line</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY product_line;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>con.execute(pricing_sql).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="61">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">product_line</th>
+<th data-quarto-table-cell-role="th">avg_wholesale_price</th>
+<th data-quarto-table-cell-role="th">avg_retail_price</th>
+<th data-quarto-table-cell-role="th">avg_wholesale_qty</th>
+<th data-quarto-table-cell-role="th">avg_retail_qty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Breaking system</td>
+<td>18.19</td>
+<td>17.60</td>
+<td>23.1</td>
+<td>4.9</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Electrical system</td>
+<td>25.93</td>
+<td>25.50</td>
+<td>22.0</td>
+<td>5.6</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Engine</td>
+<td>60.92</td>
+<td>59.87</td>
+<td>26.8</td>
+<td>5.8</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Frame &amp; body</td>
+<td>42.91</td>
+<td>42.81</td>
+<td>24.5</td>
+<td>5.4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Miscellaneous</td>
+<td>23.65</td>
+<td>22.54</td>
+<td>22.3</td>
+<td>5.5</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Suspension &amp; traction</td>
+<td>33.94</td>
+<td>33.98</td>
+<td>22.1</td>
+<td>5.7</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> Interestingly, the average_unit_price is nearly identical across both Retail and Wholesale for every single product line! Our Wholesale clients are not buying “premium” or different items; they are simply buying the exact same items in drastically higher quantities (averaging 23 units per order vs.&nbsp;Retail’s 5 units per order).</p>
+</blockquote>
+</section>
+<section id="the-retail-margin-bleed" class="level3">
+<h3 class="anchored" data-anchor-id="the-retail-margin-bleed">3.8 The Retail Margin Bleed</h3>
+<p>Earlier, we established that Wholesale clients primarily use Bank Transfers. We need to run a parallel check on our Retail consumers to see how their payment behaviors impact our bottom line, especially considering the 3% Credit Card fee.</p>
+<p><strong>Business Question:</strong> <em>How do Retail customers pay, and how much margin are we losing to their preferred methods?</em></p>
+<div id="13da1152" class="cell" data-execution_count="62">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>retail_fees_sql <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="st">    client_type,</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="st">    payment AS payment_method,</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="st">    COUNT(order_number) AS total_transactions,</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(total * payment_fee), 2) AS total_fees_lost</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'sales.csv'</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE client_type = 'Retail'</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY client_type, payment_method</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY total_fees_lost DESC;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>con.execute(retail_fees_sql).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="62">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">client_type</th>
+<th data-quarto-table-cell-role="th">payment_method</th>
+<th data-quarto-table-cell-role="th">total_transactions</th>
+<th data-quarto-table-cell-role="th">total_fees_lost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Retail</td>
+<td>Credit card</td>
+<td>659</td>
+<td>3308.15</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Retail</td>
+<td>Cash</td>
+<td>116</td>
+<td>0.00</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>💡 Key Insight:</strong> Retail clients heavily favor Credit Cards. Because credit cards carry a severe 3% fee, we lost over $3,300 to retail processing fees alone over the summer. While Retail brings in less overall revenue than Wholesale, it costs us significantly more in processing fees.</p>
+</blockquote>
+</section>
+</section>
+<section id="executive-summary" class="level2">
+<h2 class="anchored" data-anchor-id="executive-summary">4. Executive Summary</h2>
+<p>This report analyzes summer sales data (June–August 2021) across our three regional warehouses. The objective was to evaluate the health of our Wholesale division, understand product velocity, and identify areas of margin leakage.</p>
+<ul>
+<li><p><strong>Wholesale is our growth engine:</strong> While Retail revenue declined over the summer, Wholesale revenue grew by 25%, peaking at over $60,000 in August alone.</p></li>
+<li><p><strong>We are moving high volumes of low-margin items:</strong> “Breaking system” parts account for massive physical inventory movement but generate only half the revenue of our “Suspension &amp; traction” parts.</p></li>
+<li><p><strong>Payment processing is bleeding our margins:</strong> We lost over $4,800 to payment processing fees in just three months, heavily driven by Retail credit card usage and the sheer volume of Wholesale bank transfers.</p></li>
+</ul>
+</section>
+<section id="strategic-recommendations-next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="strategic-recommendations-next-steps">5. Strategic Recommendations &amp; Next Steps</h2>
+<p>Based on the data, the company should pivot its strategy heading into Q3 and Q4 to protect margins and capitalize on B2B growth.</p>
+<p><strong>1. Renegotiate B2B Payment Terms (Finance):</strong> We lost over $1,500 to Bank Transfer fees from Wholesale clients in just 90 days. Finance should leverage our high transaction volume to negotiate a flat monthly rate with our banking partners rather than paying a 1% per-transaction fee.</p>
+<p><strong>2. Implement Retail Cash Incentives (Sales/Marketing):</strong> Retail credit card fees are bleeding our B2C margins ($3,323 lost). We should introduce a “2% Cash Discount” at our retail counters. This incentivizes consumers to skip the credit card, improving our margins while making the customer feel like they got a deal.</p>
+<p><strong>3. Optimize Warehouse Shelving (Operations):</strong> The Central warehouse is moving massive volumes of “Breaking system” parts that yield lower revenue per square foot of shelf space. Operations should re-evaluate minimum holding inventory for brakes to free up warehouse space for our high-revenue “Suspension” and “Frame” components, ensuring we never stock out of our most profitable items during the August Wholesale rush.</p>
+</section>
+<section id="caveats-analytical-limitations" class="level2">
+<h2 class="anchored" data-anchor-id="caveats-analytical-limitations">6. Caveats &amp; Analytical Limitations</h2>
+<p>Every data project has limitations. For full transparency, stakeholders should be aware of the following constraints within this dataset before executing the recommended strategies:</p>
+<ul>
+<li><p><strong>Missing Cost of Goods Sold (COGS):</strong> This analysis successfully calculates <em>Net Revenue</em> by deducting payment processing fees. However, because the dataset does not include the base cost the company pays its suppliers for the parts, we cannot calculate true <em>Net Profit</em> margins.</p></li>
+<li><p><strong>Limited Time Horizon:</strong> The data exclusively covers a three-month summer window (June–August 2021). We cannot confidently predict annual seasonality, such as whether Retail sales traditionally spike in the spring or if the August Wholesale rush is an anomaly.</p></li>
+<li><p><strong>Absence of Customer Identifiers:</strong> Without unique Customer IDs linked to the order numbers, we cannot differentiate between one-time buyers and loyal repeat mechanics. This prevents us from calculating Customer Lifetime Value (CLV) or retention rates.</p></li>
+<li><p><strong>Hidden Logistical Costs:</strong> The operational efficiency metrics assume that moving a physical unit costs the same across all three warehouses. The data does not account for variable regional shipping costs, labor rates, or return rates, which could alter the true profitability of the Central warehouse.</p></li>
+</ul>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
